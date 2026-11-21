@@ -1,121 +1,129 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import {useEffect, useState} from 'react'
 import './App.css'
+import Header from './components/header.jsx';
+import Cards from './components/cards.jsx';
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+    let [cards, setCards] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                let gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=Islam makhachev double champ");
+                let result = await gif.json();
+                let islam = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=conor mcgregor walk");
+                result = await gif.json();
+                let conor = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=khabib ufc 229");
+                result = await gif.json();
+                let khabib = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=alex pereira look");
+                result = await gif.json();
+                let alex = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=joe rogan reaction");
+                result = await gif.json();
+                let rogan = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=bruce buffer");
+                result = await gif.json();
+                let bruce = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=jon jones crawl");
+                result = await gif.json();
+                let jones = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=merab dance");
+                result = await gif.json();
+                let merab = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=gsp");
+                result = await gif.json();
+                let gsp = result.data.images.original.url;
+
+                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
+                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=charles oliveira win");
+                result = await gif.json();
+                let charles = result.data.images.original.url;
+
+                let fetchedLinks = [islam, conor, khabib, alex, rogan, bruce, jones, merab, gsp, charles];
+                setCards([
+                    {
+                        id: 0,
+                        url: fetchedLinks[0]
+                    },
+                    {
+                        id: 1,
+                        url: fetchedLinks[1]
+                    },
+                    {
+                        id: 2,
+                        url: fetchedLinks[2]
+                    },
+                    {
+                        id: 3,
+                        url: fetchedLinks[3]
+                    },
+                    {
+                        id: 4,
+                        url: fetchedLinks[4]
+                    },
+                    {
+                        id: 5,
+                        url: fetchedLinks[5]
+                    },
+                    {
+                        id: 6,
+                        url: fetchedLinks[6]
+                    },
+                    {
+                        id: 7,
+                        url: fetchedLinks[7]
+                    },
+                    {
+                        id: 8,
+                        url: fetchedLinks[8]
+                    },
+                    {
+                        id: 9,
+                        url: fetchedLinks[9]
+                    },
+                ]);
+
+            } catch (e) {
+                console.log(e.message)
+            }
+        })()
+    }, [])
+
+   let [score, setScore] = useState(0);
+   let [bestScore, setBestScore] = useState(0);
+
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+      <>
+        <Header score={score} bestScore={bestScore}></Header>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <Cards></Cards>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      </>
   )
 }
 
