@@ -1,69 +1,48 @@
 import {useEffect, useState} from 'react'
-import './App.css'
 import Header from './components/header.jsx';
 import Cards from './components/cards.jsx';
 
 
 
-
 function App() {
 
+    let [clicked, setClicked] = useState([]);
+
     let [cards, setCards] = useState([]);
-/*
+
     useEffect(() => {
+        const controller = new AbortController();
+        //This is for the cleanup function, to be able to cancel the api equests if the component unmounts before they finish
+
         (async () => {
             try {
-                let gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=Islam makhachev double champ");
-                let result = await gif.json();
-                let islam = result.data.images.original.url;
 
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=conor mcgregor walk");
-                result = await gif.json();
-                let conor = result.data.images.original.url;
 
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=khabib ufc 229");
-                result = await gif.json();
-                let khabib = result.data.images.original.url;
+                const queries = [
+                    "Islam makhachev double champ",
+                    "conor mcgregor walk",
+                    "khabib ufc 229",
+                    "joe rogan reaction",
+                    "bruce buffer",
+                    "jon jones crawl",
+                    "merab dance",
+                    "gsp",
+                    "charles oliveira win"
+                ];
+                const responses = await Promise.all(
+                    queries.map(query =>
+                        fetch(`https://api.giphy.com/v1/gifs/translate?api_key=xqB4VhENB4V5LY2po0h18K1KANTvyU5N&s=${query}`, {
+                            signal: controller.signal
+                        })
+                    )
+                );
 
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=alex pereira look");
-                result = await gif.json();
-                let alex = result.data.images.original.url;
+                const results = await Promise.all(
+                    responses.map(response => response.json())
+                );
 
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=joe rogan reaction");
-                result = await gif.json();
-                let rogan = result.data.images.original.url;
+                const fetchedLinks = results.map(result => result.data.images.original.url);
 
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=bruce buffer");
-                result = await gif.json();
-                let bruce = result.data.images.original.url;
-
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=jon jones crawl");
-                result = await gif.json();
-                let jones = result.data.images.original.url;
-
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=merab dance");
-                result = await gif.json();
-                let merab = result.data.images.original.url;
-
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=gsp");
-                result = await gif.json();
-                let gsp = result.data.images.original.url;
-
-                gif = await fetch("https://api.giphy.com/v1/gifs/translate?api_key=xq" +
-                    "B4VhENB4V5LY2po0h18K1KANTvyU5N&s=charles oliveira win");
-                result = await gif.json();
-                let charles = result.data.images.original.url;
-
-                let fetchedLinks = [islam, conor, khabib, alex, rogan, bruce, jones, merab, gsp, charles];
                 setCards([
                     {
                         id: 0,
@@ -101,31 +80,33 @@ function App() {
                         id: 8,
                         url: fetchedLinks[8]
                     },
-                    {
-                        id: 9,
-                        url: fetchedLinks[9]
-                    },
                 ]);
-
             } catch (e) {
+                //to handle any case where an error from the abort controller gets caught
+                if (e.name !== "AbortError") {
                 console.log(e.message)
+                }
             }
         })()
+
+        return () => controller.abort();
+        //this is the cleanup :)
     }, [])
 
- */
+
 
    let [score, setScore] = useState(0);
    let [bestScore, setBestScore] = useState(0);
 
 
   return (
-      <>
+      <div className="App">
         <Header score={score} bestScore={bestScore}></Header>
         <div>
-          <Cards cards={cards} setCards={setCards}></Cards>
+          <Cards cards={cards} setCards={setCards} score={score} setScore={setScore} clicked={clicked}
+          setClicked={setClicked} bestScore={bestScore} setBestScore={setBestScore}></Cards>
         </div>
-      </>
+      </div>
   )
 }
 
