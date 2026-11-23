@@ -9,7 +9,7 @@ import Cards from './components/cards.jsx';
 function App() {
 
     let [cards, setCards] = useState([]);
-
+/*
     useEffect(() => {
         (async () => {
             try {
@@ -113,6 +113,8 @@ function App() {
         })()
     }, [])
 
+ */
+
    let [score, setScore] = useState(0);
    let [bestScore, setBestScore] = useState(0);
 
@@ -121,7 +123,7 @@ function App() {
       <>
         <Header score={score} bestScore={bestScore}></Header>
         <div>
-          <Cards></Cards>
+          <Cards cards={cards} setCards={setCards}></Cards>
         </div>
       </>
   )
