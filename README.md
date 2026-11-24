@@ -1,16 +1,49 @@
-# React + Vite
+# UFC Memory Card Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A UFC-themed memory card game built as a hands-on project to practice React state, props, useEffect, and asynchronous JavaScript. The game fetches fighter data from an API and challenges you to remember which cards you’ve already selected.
 
-Currently, two official plugins are available:
+## Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## [Play the game](https://ufc-memory-card.vercel.app/)
 
-## React Compiler
+## Game Rules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Select a ufc card to score a point.
+2. After each selection, the cards are shuffled.
+3. Choose a card you haven’t selected before. Selecting the same card twice resets your score.
+4. Try to get the highest score!
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- UFC cards loaded from an API
+- Asynchronous data fetching
+- Shuffled cards after each turn
+- Score tracking
+- Best-score tracking
+- Win and game-over states
+
+## Concepts Practiced
+
+- **React state:** Tracking the current score, best score, selected fighters, and game status.
+- **Props:** Passing fighter data and event handlers between components.
+- **useEffect:** Loading game data when the component mounts and responding to relevant state changes.
+- **Async JavaScript:** Fetching API data and handling loading or error states.
+
+## Built With
+
+- React
+- JavaScript
+- CSS
+- [GIPHY API](https://developers.giphy.com/)
+
+## Future Improvements
+
+- Add difficulty levels with different numbers of cards.
+- Add animations for card flips and shuffling.
+- Improve error handling for failed API requests.
+- Make the layout responsive for mobile screens.
+
+## Acknowledgments
+
+- Fighter images and GIFs are provided by the [GIPHY API](https://developers.giphy.com/).
+- Background image sourced via Pinterest.
