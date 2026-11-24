@@ -125,7 +125,7 @@ function App() {
             <Cards cards={cards} setCards={setCards} score={score} setScore={setScore} clicked={clicked}
             setClicked={setClicked} bestScore={bestScore} setBestScore={setBestScore}></Cards>
           </main>
-          <footer>All Rights reserved &copy; Rami Daood</footer>
+          <footer>2026 Rami Daood &copy; All Rights Reserved</footer>
       </div>
   )
 }
