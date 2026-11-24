@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import Header from './components/header.jsx';
 import Cards from './components/cards.jsx';
+import "./styles/footer.css";
 
 
 
@@ -27,7 +28,10 @@ function App() {
                     "jon jones crawl",
                     "merab dance",
                     "gsp",
-                    "charles oliveira win"
+                    "charles oliveira win",
+                    "demetrious johnson win",
+                    "daniel cormier",
+                    "adesanya"
                 ];
                 const responses = await Promise.all(
                     queries.map(query =>
@@ -80,6 +84,19 @@ function App() {
                         id: 8,
                         url: fetchedLinks[8]
                     },
+                    {
+                        id: 9,
+                        url: fetchedLinks[9]
+                    },
+                    {
+                        id: 10,
+                        url: fetchedLinks[10]
+
+                    },
+                    {
+                        id: 11,
+                        url: fetchedLinks[11]
+                    }
                 ]);
             } catch (e) {
                 //to handle any case where an error from the abort controller gets caught
@@ -101,11 +118,14 @@ function App() {
 
   return (
       <div className="App">
-        <Header score={score} bestScore={bestScore}></Header>
-        <div>
-          <Cards cards={cards} setCards={setCards} score={score} setScore={setScore} clicked={clicked}
-          setClicked={setClicked} bestScore={bestScore} setBestScore={setBestScore}></Cards>
-        </div>
+          <header>
+            <Header score={score} bestScore={bestScore}></Header>
+          </header>
+          <main>
+            <Cards cards={cards} setCards={setCards} score={score} setScore={setScore} clicked={clicked}
+            setClicked={setClicked} bestScore={bestScore} setBestScore={setBestScore}></Cards>
+          </main>
+          <footer>All Rights reserved &copy; Rami Daood</footer>
       </div>
   )
 }
